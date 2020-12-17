@@ -17,8 +17,11 @@ It supports [redis](https://redis.io/) protocol for these listed commands:
 - DEL
 
 Example:
+Please provide your desired port as an input argument.
 
 ``` bash
+./falconDB 8585
+
 SET foo bar
 OK!
 GET foo

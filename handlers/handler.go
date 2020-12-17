@@ -6,7 +6,7 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/falcondb/falcon/utils"
+	"github.com/Ashkanfarhady/FalconDB/utils"
 )
 
 type FalconDB struct {
