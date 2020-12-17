@@ -22,12 +22,11 @@ Please provide your desired port as an input argument.
 ``` bash
 ./falconDB 8585
 
-SET foo bar
-OK!
-GET foo
+redis-cli -p 8585 SET foo bar
+OK
+redis-cli -p 8585 GET foo 
 bar
-DEL foo
-OK!
-GET foo
-<nil>
-```
+redis-cli -p 8585 DEL foo 
+OK
+
+
