@@ -36,6 +36,7 @@ func main() {
 }
 
 func handleConnection(c net.Conn, falconDb *handlers.FalconDB) {
+	defer c.Close()
 	reader := bufio.NewReader(c)
 	for {
 		_, err := utils.ReadInteger(reader)
