@@ -21,7 +21,7 @@ func NewFalconDB() *FalconDB {
 }
 
 func (f *FalconDB) GetHandler(reader *bufio.Reader) string {
-	key := utils.ReadString(reader)
+	key, _ := utils.ReadString(reader)
 	f.lock.RLock()
 	defer f.lock.RUnlock()
 	_, ok := f.db[key]
@@ -33,8 +33,8 @@ func (f *FalconDB) GetHandler(reader *bufio.Reader) string {
 }
 
 func (f *FalconDB) SetHandler(reader *bufio.Reader) string {
-	key := utils.ReadString(reader)
-	value := utils.ReadString(reader)
+	key, _ := utils.ReadString(reader)
+	value, _ := utils.ReadString(reader)
 	f.lock.Lock()
 	defer f.lock.Unlock()
 	f.db[key] = value
@@ -42,7 +42,7 @@ func (f *FalconDB) SetHandler(reader *bufio.Reader) string {
 }
 
 func (f *FalconDB) DeleteHandler(reader *bufio.Reader) string {
-	key := utils.ReadString(reader)
+	key, _ := utils.ReadString(reader)
 	f.lock.Lock()
 	defer f.lock.Unlock()
 	_, ok := f.db[key]
