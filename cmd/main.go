@@ -25,12 +25,18 @@ func main() {
 
 	PORT := ":" + arguments[1]
 	l, err := net.Listen("tcp", PORT)
-	utils.CheckError(err)
+	if err != nil {
+		fmt.Println("Error listening:", err.Error())
+		return
+	}
 	defer l.Close()
 
 	for {
 		c, err := l.Accept()
-		utils.CheckError(err)
+		if err != nil {
+			fmt.Println("Error connecting:", err.Error())
+			continue
+		}
 		go handleConnection(c, falconDb)
 	}
 }
@@ -43,7 +49,10 @@ func handleConnection(c net.Conn, falconDb *handlers.FalconDB) {
 		if err != nil {
 			return
 		}
-		command := utils.ReadString(reader)
+		command, err := utils.ReadString(reader)
+		if err != nil {
+			return
+		}
 		answer := falconDb.InterprationHandler(command, reader)
 		c.Write([]byte(answer))
 	}
